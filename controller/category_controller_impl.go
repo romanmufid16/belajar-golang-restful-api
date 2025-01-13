@@ -26,6 +26,11 @@ func (controller CategoryControllerImpl) Create(w http.ResponseWriter, r *http.R
 		Status: "OK",
 		Data:   categoryResponse,
 	}
+
+	w.Header().Add("Content-Type", "application/json")
+	encoder := json.NewEncoder(w)
+	err = encoder.Encode(webResponse)
+	helper.PanicIfError(err)
 }
 
 func (controller CategoryControllerImpl) Update(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
